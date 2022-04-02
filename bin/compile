@@ -17,9 +17,12 @@ if [ ! -f "${ENV_DIR}/APP_BASE" ]; then
     exit 1
 fi
 APP_BASE="$(cat "${ENV_DIR}/APP_BASE")"
+LANDING_BASE="$(cat "${ENV_DIR}/LANDING_BASE")"
 
 (
+    mkdir "${STAGE}/view" &&
     mv "${BUILD_DIR}/${APP_BASE}" "${STAGE}" &&
+    mv "${BUILD_DIR}/${LANDING_BASE}" "${STAGE}/view" &&
     rm -rf "${BUILD_DIR}"/* &&
     mv "${STAGE}/$(basename "$APP_BASE")"/* "${BUILD_DIR}"
 )
