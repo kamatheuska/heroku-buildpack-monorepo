@@ -35,7 +35,11 @@ REACT_VIEW_BASE="$(cat "${ENV_DIR}/REACT_VIEW_BASE")"
     mkdir -p "${STAGE}/packages/$(basename "$LANDING_VIEW_BASE")" "${STAGE}/packages/$(basename "$REACT_VIEW_BASE")" &&
     mv "${BUILD_DIR}/${APP_BASE}" "${STAGE}" &&
     mv "${BUILD_DIR}/${LANDING_VIEW_BASE}" "${STAGE}/packages" &&
-    mv "${BUILD_DIR}/${REACT_VIEW_BASE}" "${STAGE}/pacakges" &&
+    mv "${BUILD_DIR}/${REACT_VIEW_BASE}" "${STAGE}/packages" &&
+    echo "logging builddir" &&
+    find ${BUILD_DIR} -maxdepth 4 -mindepth 2 &&
+    echo "logging STAGE" &&
+    find ${STAGE} -maxdepth 4 -mindepth 2 &&
     rm -rf "${BUILD_DIR}"/* &&
     mkdir -p "${BUILD_DIR}/packages/$(basename "$LANDING_VIEW_BASE")" "${STAGE}/packages/$(basename "$REACT_VIEW_BASE")" &&
     mv "${STAGE}/$(basename "$APP_BASE")"/* "${BUILD_DIR}" &&
