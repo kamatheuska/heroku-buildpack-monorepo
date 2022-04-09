@@ -35,13 +35,11 @@ REACT_VIEW_BASE="$(cat "${ENV_DIR}/REACT_VIEW_BASE")"
     mv "${BUILD_DIR}/${APP_BASE}" "${STAGE}" &&
 
     # moving view packages to server tmp folder
-    mkdir "${STAGE}/$(basename "${APP_BASE}")/packages" &&
-    mv "${BUILD_DIR}/packages" "${STAGE}/$(basename "${APP_BASE}")" &&
+    mkdir "${STAGE}/$(basename "$APP_BASE")/packages" &&
+    mv "${BUILD_DIR}/packages" "${STAGE}/$(basename "$APP_BASE")" &&
 
     rm -rf "${BUILD_DIR}"/* &&
-    mv "${STAGE}/$(basename "${APP_BASE}")"/* "${BUILD_DIR}" &&
-    cd $BUILD_DIR &&
-    pwd && ls -la && exit 1
+    mv "${STAGE}/$(basename "$APP_BASE")"/* "${BUILD_DIR}"
 )
 
 if [ $? -ne 0 ]; then
