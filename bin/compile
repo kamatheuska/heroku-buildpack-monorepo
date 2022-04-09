@@ -33,11 +33,10 @@ REACT_VIEW_BASE="$(cat "${ENV_DIR}/REACT_VIEW_BASE")"
 
 (
     mv "${BUILD_DIR}/${APP_BASE}" "${STAGE}" &&
-    # logging
-    find ${STAGE} -maxdepth 4 -mindepth 2 &&
     mkdir "${STAGE}/$(basename "$APP_BASE")/packages" &&
+    mv "${BUILD_DIR}/packages" "${STAGE}/$(basename "$APP_BASE")" &&
     # logging
-    find ${STAGE} -maxdepth 4 -mindepth 2 &&
+    find ${STAGE} -maxdepth 3 -mindepth 2 &&
     exit 1 &&
 
     mkdir -p "${STAGE}/${APP_BASE}/packages" &&
