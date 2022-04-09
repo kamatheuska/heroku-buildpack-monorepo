@@ -41,7 +41,7 @@ REACT_VIEW_BASE="$(cat "${ENV_DIR}/REACT_VIEW_BASE")"
     rm -rf "${BUILD_DIR}"/* &&
     mv "${STAGE}/$(basename "${APP_BASE}")"/* "${BUILD_DIR}" &&
     cd $BUILD_DIR &&
-    pwd && exit 1
+    pwd && ls -la && exit 1
 )
 
 if [ $? -ne 0 ]; then
