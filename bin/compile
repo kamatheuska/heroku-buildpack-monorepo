@@ -42,7 +42,7 @@ REACT_VIEW_BASE="$(cat "${ENV_DIR}/REACT_VIEW_BASE")"
     mv "${STAGE}/$(basename "$APP_BASE")"/* "${BUILD_DIR}" &&
     mkdir -p "${BUILD_DIR}/$(basename "$APP_BASE")/packages/" &&
     mv "${STAGE}/packages"/* "${BUILD_DIR}/$(basename "$APP_BASE")/packages" &&
-    find . -maxdepth 4 -mindepth 2
+    find ${BUILD_DIR} -maxdepth 4 -mindepth 2
 )
 
 if [ $? -ne 0 ]; then
