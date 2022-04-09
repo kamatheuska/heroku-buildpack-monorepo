@@ -12,34 +12,13 @@ CACHE_DIR="$2"
 ENV_DIR="$3"
 STAGE="$(mktemp -d)"
 
-if [ ! -f "${ENV_DIR}/APP_BASE" ]; then
-    echo "APP_BASE was not set. Aborting" | indent
-    exit 1
-fi
-
-if [ ! -f "${ENV_DIR}/LANDING_VIEW_BASE" ]; then
-    echo "LANDING_VIEW_BASE was not set. Aborting" | indent
-    exit 1
-fi
-
-if [ ! -f "${ENV_DIR}/REACT_VIEW_BASE" ]; then
-    echo "REACT_VIEW_BASE was not set. Aborting" | indent
-    exit 1
-fi
-
-APP_BASE="$(cat "${ENV_DIR}/APP_BASE")"
-LANDING_VIEW_BASE="$(cat "${ENV_DIR}/LANDING_VIEW_BASE")"
-REACT_VIEW_BASE="$(cat "${ENV_DIR}/REACT_VIEW_BASE")"
-
 (
-    mv "${BUILD_DIR}/${APP_BASE}" "${STAGE}" &&
-
-    # moving view packages to server tmp folder
-    mkdir "${STAGE}/$(basename "$APP_BASE")/packages" &&
-    mv "${BUILD_DIR}/packages" "${STAGE}/$(basename "$APP_BASE")" &&
+    mv "${BUILD_DIR}/packages" "${STAGE}" &&
 
     rm -rf "${BUILD_DIR}"/* &&
-    mv "${STAGE}/$(basename "$APP_BASE")"/* "${BUILD_DIR}"
+    mv "${STAGE}/packages/server"/* "${BUILD_DIR}" &&
+    mkdir "${BUILD_DIR}/.view-build-tmp" &&
+    mv -t "${BUILD_DIR}/.view-build-tmp" "${BUILD_DIR}/packages/landing"  "${BUILD_DIR}/packages/react-projects"
 )
 
 if [ $? -ne 0 ]; then
