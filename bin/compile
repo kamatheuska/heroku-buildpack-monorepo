@@ -18,7 +18,7 @@ STAGE="$(mktemp -d)"
     rm -rf "${BUILD_DIR}"/* &&
     mv "${STAGE}/packages/server"/* "${BUILD_DIR}" &&
     mkdir "${BUILD_DIR}/.view-build-tmp" &&
-    mv -t "${BUILD_DIR}/.view-build-tmp" "${BUILD_DIR}/packages/landing"  "${BUILD_DIR}/packages/react-projects"
+    mv -t "${BUILD_DIR}/.view-build-tmp" "${STAGE}/packages/landing"  "${STAGE}/packages/react-projects"
 )
 
 if [ $? -ne 0 ]; then
